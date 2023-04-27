@@ -30,6 +30,11 @@ class MainModel {
     
     private var searching:Bool = false
     
+    private var userDefaults = UserDefaults.standard
+    
+    private var productsToSave: [Product] = []
+    
+    
     init(controller: MainController) {
         self.controller = controller
     }
@@ -64,6 +69,26 @@ class MainModel {
         }
     }
    
+    func saveProduct(by index: Int) {
+        let product = products[index]
+        getPreviosFavourites()
+        productsToSave.append(product)
+        let encodedData = try? JSONEncoder().encode(productsToSave)
+        userDefaults.set(encodedData, forKey: "favourites")
+    }
+    
+//    func removeProduct(by index: Int) {
+//        getPreviosFavourites()
+//        productsToSave.remove(at: index)
+//    }
+
+    func getPreviosFavourites() {
+        if let favourites = userDefaults.object(forKey: "favourites") as? Data  {
+            let savedFavourites = try? JSONDecoder().decode([Product].self, from: favourites)
+            productsToSave = savedFavourites!
+        }
+    }
+    
     
     
 }

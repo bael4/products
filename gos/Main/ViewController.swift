@@ -12,6 +12,7 @@ import SnapKit
 class ViewController: UIViewController {
     
     private var controller: MainController?
+    
     private lazy var searchTextField: UITextField = {
         let view = UITextField()
         view.placeholder = "поиск"
@@ -37,6 +38,7 @@ class ViewController: UIViewController {
         setupSubviews()
         view.backgroundColor = .cyan
         controller?.fetchProducts()
+        UserDefaults.standard.set(false, forKey: "isFavourite")
     }
     
     @objc func editingChanged(_ sender: UITextField) {
@@ -79,6 +81,8 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.reuseId, for: indexPath) as! ProductCell
+        cell.delegate = self
+        cell.indexPath = indexPath
         cell.fill(product: (controller?.getProducts()[indexPath.row])!)
         return cell
     }
@@ -90,3 +94,13 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+extension ViewController: ProductActions {
+//    func removeFavouriteTap(index: Int) {
+//        controller?.removeData(index: index)
+//    }
+    
+    func favouriteTap(index: Int) {
+     // вызвать функцию для передачи данных контроллеру и далее модели
+        controller?.dataToSave(index: index)
+    }
+}

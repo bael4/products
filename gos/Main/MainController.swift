@@ -34,5 +34,14 @@ class MainController {
     func serch (text: String) {
         model?.search(searchingText: text )
     }
+    
+    func dataToSave(index: Int) {
+        model?.saveProduct(by: index)
+    }
+//    
+//    func removeData(index: Int) {
+//        model?.removeProduct(by: index)
+//    }
+    
 
 }

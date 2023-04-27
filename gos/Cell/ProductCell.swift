@@ -10,9 +10,23 @@ import UIKit
 import SnapKit
 import Kingfisher
 
+
+
+protocol ProductActions: AnyObject {
+    func favouriteTap(index: Int)
+//    func removeFavouriteTap(index: Int)
+}
+
+
 class ProductCell: UICollectionViewCell {
     
     static var reuseId = "product_cell"
+    
+    weak var delegate: ProductActions?
+    
+    var indexPath: IndexPath?
+    
+    var isFavourite: Bool = false
     
     
     
@@ -45,6 +59,9 @@ class ProductCell: UICollectionViewCell {
     private lazy var favouriteImageView: UIImageView = {
         let view = UIImageView()
         view.image = UIImage(systemName: "heart")
+        view.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(favouriteTapped))
+        view.addGestureRecognizer(tap)
         return view
     }()
     
@@ -59,6 +76,23 @@ class ProductCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError()
+    }
+    
+    @objc func favouriteTapped() {
+       
+
+      
+        isFavourite = !isFavourite
+                UserDefaults.standard.set(isFavourite, forKey: "isFavourite")
+                
+                // Устанавливаем изображение для favouriteImageView
+                if isFavourite {
+                    favouriteImageView.image = UIImage(systemName: "heart.fill")
+                } else {
+                    favouriteImageView.image = UIImage(systemName: "heart")
+                }
+       
+        
     }
     
     func fill(product: Product) {
