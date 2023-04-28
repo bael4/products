@@ -10,9 +10,9 @@ import UIKit
 import SnapKit
 
 class ViewController: UIViewController {
-    
+
     private var controller: MainController?
-    
+
     private lazy var searchTextField: UITextField = {
         let view = UITextField()
         view.placeholder = "поиск"
@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         view.addTarget(self, action: #selector(editingChanged), for: .editingChanged)
         return view
     }()
-    
+
     private lazy var productsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let view = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -39,13 +39,13 @@ class ViewController: UIViewController {
         view.backgroundColor = .cyan
         controller?.fetchProducts()
     }
-    
+
     @objc func editingChanged(_ sender: UITextField) {
         let search = sender.text ?? ""
         controller?.serch(text: search)
         print(searchTextField.text!)
     }
-    
+
     private func setupSubviews() {
         view.addSubview(searchTextField)
         searchTextField.snp.makeConstraints { make in
@@ -54,8 +54,8 @@ class ViewController: UIViewController {
             make.right.equalToSuperview().offset(-20)
             make.height.equalTo(44)
         }
-        
-        
+
+
         view.addSubview(productsCollectionView)
         productsCollectionView.snp.makeConstraints { make in
             make.top.equalTo(searchTextField.snp.bottom).offset(20)
@@ -64,7 +64,7 @@ class ViewController: UIViewController {
             make.bottom.equalToSuperview()
         }
     }
-    
+
     func reloadProductsCollectionView() {
         DispatchQueue.main.async {
             self.productsCollectionView.reloadData()
@@ -77,11 +77,13 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         controller?.getProducts().count ?? 0
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.reuseId, for: indexPath) as! ProductCell
         cell.delegate = self
         cell.indexPath = indexPath
+        cell.isLiked = UserDefaults.standard.bool(forKey: "isLiked_\(indexPath.row)")
+        cell.updateHeartImage()
         cell.fill(product: (controller?.getProducts()[indexPath.row])!)
         return cell
     }
@@ -97,10 +99,11 @@ extension ViewController: ProductActions {
     func removeFavouriteTap(index: Int) {
         controller?.removeData(index: index)
     }
-    
+
     func favouriteTap(index: Int) {
         // вызвать функцию для передачи данных контроллеру и далее модели
         controller?.dataToSave(index: index)
         }
     }
-    
+
+

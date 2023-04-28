@@ -29,6 +29,9 @@ class ProductCell: UICollectionViewCell {
     
     var isFavourite: Bool = false
     
+    let defaults = UserDefaults.standard
+    var isLiked: Bool = false
+    
     private lazy var productImageView: UIImageView = {
         let view = UIImageView()
         view.contentMode = .scaleAspectFit
@@ -59,6 +62,7 @@ class ProductCell: UICollectionViewCell {
         let view = UIImageView()
         view.image = UIImage(systemName: "heart")
         view.isUserInteractionEnabled = true
+        view.tintColor = .red
         let tap = UITapGestureRecognizer(target: self, action: #selector(favouriteTapped))
         view.addGestureRecognizer(tap)
         return view
@@ -71,6 +75,8 @@ class ProductCell: UICollectionViewCell {
         layer.borderColor = UIColor.black.cgColor
         layer.cornerRadius = 5
         backgroundColor = .white
+        isLiked = defaults.bool(forKey: "isLiked")
+               updateHeartImage()
     }
     
     required init?(coder: NSCoder) {
@@ -78,17 +84,32 @@ class ProductCell: UICollectionViewCell {
     }
     
     @objc func favouriteTapped() {
-        isFavourite = !isFavourite
-                UserDefaults.standard.set(isFavourite, forKey: "isFavourite")
-                if isFavourite {
-                    favouriteImageView.image = UIImage(systemName: "heart.fill")
-                    isFavourite = true
-                    delegate?.favouriteTap(index: indexPath!.row)
-                } else {
-                    favouriteImageView.image = UIImage(systemName: "heart")
-                    isFavourite = false
-                    delegate?.removeFavouriteTap(index: indexPath!.row)
-                }
+        isLiked = !isLiked
+        updateHeartImage()
+        defaults.set(isLiked, forKey: "isLiked_\(indexPath!.row)")
+        
+       
+        UserDefaults.standard.set(isFavourite, forKey: "isFavourite")
+        if isLiked {
+           
+        delegate?.favouriteTap(index: indexPath!.row)
+        } else {
+ 
+        delegate?.removeFavouriteTap(index: indexPath!.row)
+        }
+        
+    }
+    
+    func updateHeartImage() {
+        if isLiked {
+        favouriteImageView.image = UIImage(systemName: "heart.fill")
+        delegate?.favouriteTap(index: indexPath!.row)
+        }
+        
+        else {
+        favouriteImageView.image = UIImage(systemName: "heart")
+        delegate?.removeFavouriteTap(index: indexPath!.row)
+        }
     }
     
     func fill(product: Product) {
@@ -97,6 +118,7 @@ class ProductCell: UICollectionViewCell {
         productPriceLabel.text = "\(product.price) $"
     }
 
+    
     private func setupSubviews() {
         addSubview(productImageView)
         productImageView.snp.makeConstraints { make in
