@@ -27,6 +27,7 @@ class NetworkManager {
 //                print(result)
                 completion(result)
                 print(statusCode.statusCode)
+//                print(result.products[0])
             } catch  {
                 //completion(ProductResponse(products: []))
                 print(error)

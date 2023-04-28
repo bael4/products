@@ -78,7 +78,11 @@ class MainModel {
     func saveProduct(by index: Int) {
         let product = products[index]
         getPreviosFavourites()
-        productsToSave.append(product)
+        
+        if !productsToSave.contains(where: { $0.id == product.id }) {
+            productsToSave.append(product)
+        }
+        
         let encodedData = try? JSONEncoder().encode(productsToSave)
         userDefaults.set(encodedData, forKey: "favourites")
     }
