@@ -14,7 +14,8 @@ import Kingfisher
 
 protocol ProductActions: AnyObject {
     func favouriteTap(index: Int)
-//    func removeFavouriteTap(index: Int)
+    func removeFavouriteTap(index: Int)
+
 }
 
 
@@ -27,8 +28,6 @@ class ProductCell: UICollectionViewCell {
     var indexPath: IndexPath?
     
     var isFavourite: Bool = false
-    
-    
     
     private lazy var productImageView: UIImageView = {
         let view = UIImageView()
@@ -79,20 +78,17 @@ class ProductCell: UICollectionViewCell {
     }
     
     @objc func favouriteTapped() {
-       
-
-      
         isFavourite = !isFavourite
                 UserDefaults.standard.set(isFavourite, forKey: "isFavourite")
-                
-                // Устанавливаем изображение для favouriteImageView
                 if isFavourite {
                     favouriteImageView.image = UIImage(systemName: "heart.fill")
+                    isFavourite = true
+                    delegate?.favouriteTap(index: indexPath!.row)
                 } else {
                     favouriteImageView.image = UIImage(systemName: "heart")
+                    isFavourite = false
+                    delegate?.removeFavouriteTap(index: indexPath!.row)
                 }
-       
-        
     }
     
     func fill(product: Product) {

@@ -38,7 +38,6 @@ class ViewController: UIViewController {
         setupSubviews()
         view.backgroundColor = .cyan
         controller?.fetchProducts()
-        UserDefaults.standard.set(false, forKey: "isFavourite")
     }
     
     @objc func editingChanged(_ sender: UITextField) {
@@ -95,12 +94,13 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ViewController: ProductActions {
-//    func removeFavouriteTap(index: Int) {
-//        controller?.removeData(index: index)
-//    }
+    func removeFavouriteTap(index: Int) {
+        controller?.removeData(index: index)
+    }
     
     func favouriteTap(index: Int) {
-     // вызвать функцию для передачи данных контроллеру и далее модели
+        // вызвать функцию для передачи данных контроллеру и далее модели
         controller?.dataToSave(index: index)
+        }
     }
-}
+    
