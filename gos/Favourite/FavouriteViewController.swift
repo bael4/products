@@ -11,7 +11,10 @@ import SnapKit
 
 class FavouriteViewController: UIViewController {
     
+    
     private let userDefaults = UserDefaults.standard
+    private var controller: FavouriteController?
+    
     
     private lazy var favouritesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -28,6 +31,8 @@ class FavouriteViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSubViews()
+        controller = FavouriteController(view: self)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

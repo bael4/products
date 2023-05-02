@@ -38,6 +38,7 @@ class ViewController: UIViewController {
         setupSubviews()
         view.backgroundColor = .cyan
         controller?.fetchProducts()
+      
     }
 
     @objc func editingChanged(_ sender: UITextField) {
@@ -80,10 +81,8 @@ extension ViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCell.reuseId, for: indexPath) as! ProductCell
-        cell.delegate = self
         cell.indexPath = indexPath
-        cell.isLiked = UserDefaults.standard.bool(forKey: "isLiked_\(indexPath.row)")
-        cell.updateHeartImage()
+        cell.delegate = self
         cell.fill(product: (controller?.getProducts()[indexPath.row])!)
         return cell
     }
@@ -99,6 +98,7 @@ extension ViewController: ProductActions {
     func removeFavouriteTap(index: Int) {
         controller?.removeData(index: index)
     }
+    
 
     func favouriteTap(index: Int) {
         // вызвать функцию для передачи данных контроллеру и далее модели

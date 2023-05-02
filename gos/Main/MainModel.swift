@@ -34,6 +34,7 @@ class MainModel {
     
     private var productsToSave: [Product] = []
     
+    private var productsToSaveId: [Int:Product] = [:]
     
     private var newProductsToSave: [Product] = []
     
@@ -72,11 +73,10 @@ class MainModel {
     }
     
     
-  
-   
-    
     func saveProduct(by index: Int) {
         let product = products[index]
+       
+        
         getPreviosFavourites()
         
         if !productsToSave.contains(where: { $0.id == product.id }) {
@@ -89,11 +89,9 @@ class MainModel {
     
     func removeProduct(by index: Int) {
         getPreviosFavourites()
-        if productsToSave.indices.contains(index) {
-            productsToSave.remove(at: index)
-        }
-        
-        let encodedData = try? JSONEncoder().encode(productsToSave)
+        let productId = products[index].id
+        let res = productsToSave.filter {$0.id != productId}
+        let encodedData = try? JSONEncoder().encode(res)
         userDefaults.set(encodedData, forKey: "favourites")
     }
     

@@ -27,7 +27,11 @@ class NetworkManager {
 //                print(result)
                 completion(result)
                 print(statusCode.statusCode)
-//                print(result.products[0])
+                
+                for index in result.products.indices {
+                        print(index)
+                    }
+                
             } catch  {
                 //completion(ProductResponse(products: []))
                 print(error)
