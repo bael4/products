@@ -60,8 +60,8 @@ class ViewController: UIViewController {
         view.addSubview(productsCollectionView)
         productsCollectionView.snp.makeConstraints { make in
             make.top.equalTo(searchTextField.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(10)
-            make.right.equalToSuperview().offset(-10)
+            make.left.equalToSuperview()
+            make.right.equalToSuperview()
             make.bottom.equalToSuperview()
         }
     }
@@ -90,18 +90,12 @@ extension ViewController: UICollectionViewDataSource {
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (view.frame.width / 2) - 20, height: 290)
+        return CGSize(width: (view.frame.width / 2.2 ), height: 290)
     }
 }
 
 extension ViewController: ProductActions {
-    func removeFavouriteTap(index: Int) {
-        controller?.removeData(index: index)
-    }
-    
-
     func favouriteTap(index: Int) {
-        // вызвать функцию для передачи данных контроллеру и далее модели
         controller?.dataToSave(index: index)
         }
     }

@@ -23,7 +23,13 @@ class TabBarController: UITabBarController {
         let mainIcon = UIImage(systemName: "house.fill")
         let favouriteIcon = UIImage(systemName: "heart")
         
-        viewControllers = [generateNavigatonController(rootViewController: mainViewController, image: mainIcon!), generateNavigatonController(rootViewController: favouriteViewController, image: favouriteIcon!)]
+        viewControllers = [
+            generateNavigatonController(
+                rootViewController: mainViewController,
+                image: mainIcon!),
+            generateNavigatonController(
+                rootViewController: favouriteViewController,
+                image: favouriteIcon!)]
     }
     
     
@@ -32,5 +38,4 @@ class TabBarController: UITabBarController {
         navigaionController.tabBarItem.image = image
         return navigaionController
     }
-    
 }

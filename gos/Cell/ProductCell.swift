@@ -10,14 +10,9 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-
-
 protocol ProductActions: AnyObject {
     func favouriteTap(index: Int)
-    func removeFavouriteTap(index: Int)
-
 }
-
 
 class ProductCell: UICollectionViewCell {
     
@@ -30,7 +25,7 @@ class ProductCell: UICollectionViewCell {
     var isFavourite: Bool = false
     
     let defaults = UserDefaults.standard
-    var isLiked: Bool = false
+
     
     private lazy var productImageView: UIImageView = {
         let view = UIImageView()
@@ -68,8 +63,6 @@ class ProductCell: UICollectionViewCell {
         return view
     }()
     
-  
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubviews()
@@ -77,28 +70,17 @@ class ProductCell: UICollectionViewCell {
         layer.borderColor = UIColor.black.cgColor
         layer.cornerRadius = 5
         backgroundColor = .white
-        
     }
-    
-  
     
     required init?(coder: NSCoder) {
         fatalError()
     }
     
     @objc func favouriteTapped() {
-       
-        if isFavourite == false {
-            favouriteImageView.image = UIImage(systemName: "heart.fill")
-            delegate?.favouriteTap(index: indexPath!.row)
-            isFavourite = true
-        }else {
-            favouriteImageView.image = UIImage(systemName: "heart")
-            delegate?.removeFavouriteTap(index: indexPath!.row)
-            isFavourite = false
-        }
-
-       }
+        favouriteImageView.image = UIImage(systemName: "heart.fill")
+        delegate?.favouriteTap(index: indexPath!.row)
+        defaults.set(isFavourite, forKey: "isFavourite")
+    }
        
     
     func fill(product: Product) {
@@ -126,7 +108,7 @@ class ProductCell: UICollectionViewCell {
         
         addSubview(productTitleLabel)
         productTitleLabel.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(5)
+            make.left.equalToSuperview()
             make.top.equalTo(productImageView.snp.bottom).offset(10)
             make.right.equalTo(favouriteImageView.snp.left).offset(-10)
             make.height.equalTo(44)
@@ -138,8 +120,5 @@ class ProductCell: UICollectionViewCell {
             make.left.equalToSuperview().offset(5)
             make.top.equalTo(productTitleLabel.snp.bottom).offset(5)
         }
-        
-        
     }
-    
 }

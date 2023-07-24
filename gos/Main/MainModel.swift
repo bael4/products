@@ -17,12 +17,14 @@ struct Product: Codable {
     var description: String
     var price: Int
     var thumbnail: String
+    var isFavorite: Bool?
 }
+
 
 class MainModel {
     private weak var controller: MainController!
     
-    private var networkManager = NetworkManager()
+    private var networkManager = NetworkService()
     
     private var products: [Product] = []
     
@@ -44,7 +46,13 @@ class MainModel {
     
     func fetchProducts() {
         networkManager.fetchProducts { result in
-            self.products = result.products
+            switch result {
+            case .success(let product):
+                self.products = product
+            case .failure(let error):
+                print("\(error)")
+            }
+            
             self.controller.collectionViewReloaded()
         }
     }

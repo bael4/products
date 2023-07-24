@@ -16,7 +16,7 @@
 		BE1C8A1029F81BD20023B1F2 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C8A0F29F81BD20023B1F2 /* MainModel.swift */; };
 		BE1C8A1229F81BEB0023B1F2 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C8A1129F81BEB0023B1F2 /* MainController.swift */; };
 		BE1C8A1429F81BFE0023B1F2 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C8A1329F81BFE0023B1F2 /* ProductCell.swift */; };
-		BE1C8A1629F81C210023B1F2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C8A1529F81C210023B1F2 /* NetworkManager.swift */; };
+		BE1C8A1629F81C210023B1F2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C8A1529F81C210023B1F2 /* NetworkService.swift */; };
 		BE1C8A1829F81C3E0023B1F2 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C8A1729F81C3E0023B1F2 /* TabBarController.swift */; };
 		BE1C8A1A29F81C920023B1F2 /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1C8A1929F81C920023B1F2 /* FavouriteViewController.swift */; };
 		BE30D66F29FD374E000DA0A7 /* FavouriteController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE30D66E29FD374E000DA0A7 /* FavouriteController.swift */; };
@@ -38,7 +38,7 @@
 		BE1C8A0F29F81BD20023B1F2 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
 		BE1C8A1129F81BEB0023B1F2 /* MainController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
 		BE1C8A1329F81BFE0023B1F2 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
-		BE1C8A1529F81C210023B1F2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		BE1C8A1529F81C210023B1F2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BE1C8A1729F81C3E0023B1F2 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		BE1C8A1929F81C920023B1F2 /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		BE30D66E29FD374E000DA0A7 /* FavouriteController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteController.swift; sourceTree = "<group>"; };
@@ -91,7 +91,7 @@
 				BE1C8A0929F81ADA0023B1F2 /* Info.plist */,
 				BE1C8A1D29F97C950023B1F2 /* Main */,
 				BE1C8A1E29F97CA50023B1F2 /* Cell */,
-				BE1C8A1529F81C210023B1F2 /* NetworkManager.swift */,
+				BE1C8A1529F81C210023B1F2 /* NetworkService.swift */,
 				BE1C8A1729F81C3E0023B1F2 /* TabBarController.swift */,
 				BE30D67229FD4324000DA0A7 /* Favourite */,
 				BE1C8A0129F81AD90023B1F2 /* Main.storyboard */,
@@ -267,7 +267,7 @@
 				BE1C8A0029F81AD90023B1F2 /* ViewController.swift in Sources */,
 				BE1C89FC29F81AD90023B1F2 /* AppDelegate.swift in Sources */,
 				BE1C8A1A29F81C920023B1F2 /* FavouriteViewController.swift in Sources */,
-				BE1C8A1629F81C210023B1F2 /* NetworkManager.swift in Sources */,
+				BE1C8A1629F81C210023B1F2 /* NetworkService.swift in Sources */,
 				BE1C8A1429F81BFE0023B1F2 /* ProductCell.swift in Sources */,
 				BE1C89FE29F81AD90023B1F2 /* SceneDelegate.swift in Sources */,
 				BE1C8A1229F81BEB0023B1F2 /* MainController.swift in Sources */,
